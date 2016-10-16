@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+ <RelativeLayout
+    style="@style/RelativeLayoutStyle"
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     tools:context="com.example.ruaasamara.simpletask.HomeActivity"
+
+    >
+
+
+
+    <!-- background style -->
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/signin_img2"/>
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/walkthrough_bg"
+            android:alpha="0.7"
+            />
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            android:layout_alignParentTop="true"
+            android:background="#33ffffff"
+            android:clipToPadding="false"
+            android:paddingBottom="5dp"
+            >
+            <TextView
+                android:text="Profile 4"
+                android:layout_gravity="center"
+                android:textSize="24dp"
+                android:id="@+id/toolbar_title"
+                style="@style/TextViewStyle" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile 4"
+                android:layout_gravity="right"
+                android:id="@+id/toolRightIcon"
+                android:src="@drawable/menu3"/>
+        </android.support.v7.widget.Toolbar>
+
+
+    <ImageView
+           android:id="@+id/multiCircle"
+           android:layout_width="80dp"
+           android:layout_height="80dp"
+           android:scaleType="centerCrop"
+           android:background="@drawable/img_bg"
+           android:layout_marginTop="5dp"
+           android:layout_below="@id/toolbar"/>
+
+        <TextView
+          android:id="@+id/sladeDesign"
+          android:text="Slade Design"
+          android:textStyle="bold"
+          android:textSize="20dp"
+          android:paddingLeft="10dp"
+          android:layout_marginTop="30dp"
+          android:layout_toRightOf="@+id/multiCircle"
+          android:layout_below="@id/toolbar"
+          style="@style/TextViewStyle" />
+
+        <TextView
+          android:text="UI/UX Designer"
+          android:paddingLeft="10dp"
+          android:layout_below="@+id/sladeDesign"
+          android:layout_toRightOf="@+id/multiCircle"
+          android:id="@+id/textView2"
+          style="@style/TextViewStyle"/>
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:id="@+id/linearLayout"
+        android:layout_marginBottom="16dp"
+        android:weightSum="1"
+        android:background="@drawable/roundedlayout"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/multiCircle"
+        android:orientation="vertical">
+        <TextView
+            android:text="ABOUT ME"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/sladeDesign"
+            android:layout_toRightOf="@+id/multiCircle"
+            android:id="@+id/aboutMe"
+            style="@style/TextViewStyle"/>
+        <TextView
+            android:text="Lorem ipsum dolor site amet, cinsectetr adipisscing elit, sed do elumod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, qus nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in volupatate velit esse cillum dolor eu fugiat nulla pariatur."
+            android:textSize="12dp"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/text"
+            style="@style/TextViewStyle"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#ffffff"/>
+        <TextView
+            android:text="COMMON FRIENDS"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/commonDriends"
+            style="@style/TextViewStyle"/>
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+           <View
+               style="@style/ViewStyle"/>
+           <View
+              style="@style/ViewStyle"/>
+           <View
+               style="@style/ViewStyle"/>
+           <View
+               style="@style/ViewStyle"/>
+           <View
+               style="@style/ViewStyle"/>
+
+       </LinearLayout>
+        <TextView
+            android:text="HOBBIES"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="16dp"
+            style="@style/TextViewStyle"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:id="@+id/cooking"
+                android:text="Cooking"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:textSize="18dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/roundedtextview"
+                style="@style/TextViewStyle"/>
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:id="@+id/design"
+                android:text="Design"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:textSize="18dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/cooking"
+                android:background="@drawable/roundedtextview"
+                style="@style/TextViewStyle"/>
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:id="@+id/fashion"
+                android:text="Fashion"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:textSize="18dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/design"
+                android:background="@drawable/roundedtextview"
+                style="@style/TextViewStyle"/>
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:id="@+id/sporting"
+                android:text="Sporting"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:textSize="18dp"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/cooking"
+                android:background="@drawable/roundedtextview"
+                style="@style/TextViewStyle"/>
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:id="@+id/reading"
+                android:text="Reading"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:textSize="18dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/sporting"
+                android:layout_below="@+id/design"
+                android:background="@drawable/roundedtextview"
+                style="@style/TextViewStyle"/>
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:id="@+id/watchingTV"
+                android:text="Watching TV"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:textSize="18dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/reading"
+                android:layout_below="@+id/fashion"
+                android:background="@drawable/roundedtextview"
+                style="@style/TextViewStyle"/>
+
+
+        </RelativeLayout>
+
+
+
+
+       </LinearLayout>
+
+       <Button
+        android:layout_width="180dp"
+        android:text="Contact"
+        android:id="@+id/contact"
+        style="@style/ButtonStyle"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true" />
+      <Button
+        android:layout_width="180dp"
+        android:text="Follow"
+        android:id="@+id/follow"
+        style="@style/ButtonStyle"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toRightOf="@+id/contact"
+        />
+
+
+</RelativeLayout>
