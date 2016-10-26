@@ -1,25 +1,23 @@
-package com.example.ruaasamara.simpletask;
+package com.example.developping.simpletask;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.view.View;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.widget.Toast;
-import android.content.Context;
-import android.util.Log;
-import android.preference.PreferenceManager;
 
 
 public class SignUpActivity extends AppCompatActivity {
     Button registerButton, signInWithFB;
     EditText userName, userEmail, userPassword;
-    TextView signUp;
     Toast toast;
     GradientDrawable blue,black;
     SharedPreferences sharedpreferences;
@@ -42,17 +40,10 @@ public class SignUpActivity extends AppCompatActivity {
         userEmail=(EditText)findViewById(R.id.email);
         userPassword=(EditText)findViewById(R.id.password);
 
-
-
-
         blue = (GradientDrawable) registerButton.getBackground();
         blue.setColor(ContextCompat.getColor(this, R.color.buttonBlue));
         black = (GradientDrawable) signInWithFB.getBackground();
         black.setColor(ContextCompat.getColor(this, R.color.buttonBlack));
-
-
-
-
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +54,6 @@ public class SignUpActivity extends AppCompatActivity {
                 if(!sharedpreferences.contains(email)){
                     editor.putString(email, password);
                     editor.commit();
-                    Log.i("SignUp activity", sharedpreferences.getString(email,null));
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);
 

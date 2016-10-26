@@ -1,4 +1,4 @@
-package com.example.ruaasamara.simpletask;
+package com.example.developping.simpletask;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

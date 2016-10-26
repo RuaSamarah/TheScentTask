@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">SignIn Page</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string-array name="hobbies">
+        <item>Cooking</item>
+        <item>Design</item>
+        <item>Fashon</item>
+        <item>Sporting</item>
+        <item>Reading</item>
+        <item>Watching TV</item>
+    </string-array>
 </resources>

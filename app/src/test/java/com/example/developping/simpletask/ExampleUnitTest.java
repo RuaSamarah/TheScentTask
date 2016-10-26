@@ -1,4 +1,4 @@
-package com.example.ruaasamara.simpletask;
+package com.example.developping.simpletask;
 
 import org.junit.Test;
 

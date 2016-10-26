@@ -1,20 +1,18 @@
-package com.example.ruaasamara.simpletask;
+package com.example.developping.simpletask;
 
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.content.Intent;
-import android.widget.TextView;
-import android.widget.EditText;
-import android.content.SharedPreferences;
-import android.widget.Toast;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Button start;
@@ -38,15 +36,8 @@ public class MainActivity extends AppCompatActivity {
         toast = new Toast(this);
         start = (Button) findViewById(R.id.login);
         signUp = (TextView) findViewById(R.id.signup);
-
-
-
-
         blue = (GradientDrawable) start.getBackground();
         blue.setColor(ContextCompat.getColor(this, R.color.buttonBlue));
-
-
-
 
 
 
@@ -87,10 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 // Switching to Register screen
                 Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(i);
-
-
             }
         });
     }
+
 }
 
