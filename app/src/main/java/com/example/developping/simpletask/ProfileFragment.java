@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.json.JSONException;
@@ -25,6 +28,8 @@ public class ProfileFragment extends Fragment {
 
     Button button;
     ListView listView;
+    LinearLayout linearLayout;
+    GridView hobbiesGridView;
     ArrayAdapter<String> adapter;
     EditText name;
     EditText job;
@@ -46,6 +51,8 @@ public class ProfileFragment extends Fragment {
         about = (EditText)rootView.findViewById(R.id.aboutMeText);
         friends = (EditText)rootView.findViewById(R.id.friends);
         profilePicture = (ImageView) rootView.findViewById(R.id.profileImg);
+        linearLayout = (LinearLayout)rootView.findViewById(R.id.friendsLayout);
+        hobbiesGridView = (GridView)rootView.findViewById(R.id.gridView);
         visit = false;
 
         return rootView;
@@ -81,20 +88,17 @@ public class ProfileFragment extends Fragment {
                     outputStrArr[i] = selectedItems.get(i);
                 }
 
-                String userName = (String) name.getText().toString();
-                String userJob = (String) job.getText().toString();
-                String userAbout = (String) about.getText().toString();
-                String userFriends = (String) friends.getText().toString();
+                String userName = (String) name.getText().toString().trim();;
+                String userJob = (String) job.getText().toString().trim();;
+                String userAbout = (String) about.getText().toString().trim();;
+                String userFriends = (String) friends.getText().toString().trim();;
                 // Create a bundle object
                 Bundle b = new Bundle();
                 b.putStringArray("selectedItems", outputStrArr);
-
                 b.putString("userName", userName);
                 b.putString("userJob", userJob);
                 b.putString("userAbout", userAbout);
                 b.putString("userFriends", userFriends);
-
-                String[] resultArr = b.getStringArray("selectedItems");
                 JsonUtil json = new JsonUtil();
                 try {
                    String jsonStr =  json.toJSon(b);
@@ -102,6 +106,7 @@ public class ProfileFragment extends Fragment {
                     editor.putString("profileInfo",jsonStr);
                     editor.putBoolean("visit", visit);
                     editor.commit();
+                    cleaning();
                     getFragmentManager().popBackStack();
 
                 } catch (JSONException e) {
@@ -121,6 +126,14 @@ public class ProfileFragment extends Fragment {
             }});
 
 
+    }
+    public void cleaning(){
+
+        if (hobbiesGridView != null) {
+            if (hobbiesGridView.getChildCount() > 0) {
+                hobbiesGridView.removeAllViews();
+            }
+        }
     }
 
 }
