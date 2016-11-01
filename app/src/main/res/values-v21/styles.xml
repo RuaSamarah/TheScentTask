@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="FragmentTheme">
+                <item name="android:buttonStyle">@style/FragmentStyle</item>
+                <item name="android:textViewStyle">@style/FragmentStyle</item>
+                <item name="android:editTextStyle">@style/FragmentStyle</item>
+                <item name="android:listViewStyle">@style/FragmentListViewStyle</item>
+                <item name="android:toolbarStyle">@style/ToobarStyle</item>
+
+        </style>
+</resources>

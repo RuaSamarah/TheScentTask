@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -33,13 +34,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -62,11 +66,13 @@ public class HomeActivity extends AppCompatActivity {
     int repeated;
     ArrayList<String> hobbiesList;
     GridView gridView;
+    Realm realm;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Realm realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_home);
 
         repeated= 1;
@@ -103,11 +109,8 @@ public class HomeActivity extends AppCompatActivity {
         icon.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 fragment = new ProfileFragment();
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.drawer_layout, fragment);
-                ft.addToBackStack(null);
-                ft.commit();
-                getSupportFragmentManager().addOnBackStackChangedListener(getListener());
+                new MoveToFragment(fragment).execute();
+
             }
         });
 
@@ -126,10 +129,20 @@ public class HomeActivity extends AppCompatActivity {
         String jsonString = sharedpreferences.getString("profileInfo", null);
         JSONObject jsonObj = new JSONObject(jsonString);
 
-        String username = jsonObj.getString("name");
-        String userjob = jsonObj.getString("job");
-        String userabout = jsonObj.getString("about");
-        String userfriends = jsonObj.getString("friends");
+        realm = Realm.getDefaultInstance();
+        RealmQuery query = realm.where(User.class);
+        RealmResults results = query.findAll();
+        User user = (User) results.get(0);
+        String username = user.getUserName();
+        String userjob = user.getUserJob();
+        String userabout = user.getUserAbout();
+        String userfriends = user.getUserFriends();
+
+
+       // String username = jsonObj.getString("name");
+       // String userjob = jsonObj.getString("job");
+       // String userabout = jsonObj.getString("about");
+       // String userfriends = jsonObj.getString("friends");
 
         name.setText(username);
         job.setText(userjob);
@@ -138,11 +151,16 @@ public class HomeActivity extends AppCompatActivity {
             Log.d("the friends not null", userfriends);
             setFriends(userfriends);
         }
-        JSONArray hobbiesArray = jsonObj.getJSONArray("hobbies");
+
+        String[] userHoppies = user.getSelectedItems();
+        for (int i = 0; i < userHoppies.length; i++) {
+            hobbiesList.add(userHoppies[i]);
+        }
+       /* JSONArray hobbiesArray = jsonObj.getJSONArray("hobbies");
         for (int i = 0; i < hobbiesArray.length(); i++) {
             JSONObject obj = hobbiesArray.getJSONObject(i);
             drawHobby(obj, i);
-        }
+        }*/
         // hobbies arrayList is ready
         Log.d("hobbies list", hobbiesList.toString());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.grid_view_item, hobbiesList);
@@ -257,6 +275,29 @@ public class HomeActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private class MoveToFragment extends AsyncTask<String, Void, Boolean> {
+        private ProfileFragment fragment;
+
+        public MoveToFragment(ProfileFragment fragment){
+            this.fragment = fragment;
+        }
+
+        protected Boolean doInBackground(String... urls) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.drawer_layout, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+            getSupportFragmentManager().addOnBackStackChangedListener(getListener());
+            return true;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
 }

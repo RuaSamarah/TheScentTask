@@ -2,186 +2,87 @@
 <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ScrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:scrollbars="none" >
-
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    android:layout_height="900dp"
+    android:scrollbars="none"
+    android:fillViewport="true">
 
  <RelativeLayout
-    style="@style/RelativeLayoutStyle"
+    style="@style/RelativeLayoutStyle">
 
-    >
-
-
-
-    <!-- background style -->
-
-        <ImageView
+     <ImageView
             android:id="@+id/img2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/walkthrough_bg"
-            />
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            android:layout_alignParentTop="true"
-            android:background="#33ffffff"
-            android:clipToPadding="false"
-            android:paddingBottom="3dp"
-            >
-            <TextView
-                android:text="My Profile"
-                android:layout_gravity="center"
-                android:textSize="20dp"
-                android:id="@+id/toolbar_title"
-                android:gravity="center"
-                android:layout_width="match_parent"
-               android:layout_height="wrap_content" />
-        </android.support.v7.widget.Toolbar>
+            android:src="@drawable/walkthrough_bg"/>
+     <android.support.v7.widget.Toolbar style="@style/ToobarStyle">
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="My Profile"
+             android:id="@+id/toolbar_title"
+             style="@style/ToolbarTextViewStyle"/>
+     </android.support.v7.widget.Toolbar>
 
      <ImageView
          android:id="@+id/profileImg"
-         android:layout_width="80dp"
          android:layout_height="80dp"
-         android:scaleType="centerCrop"
-         android:layout_marginTop="16dp"
+         android:layout_width="80dp"
          android:layout_below="@id/toolbar"
-         android:background="@drawable/circle"
-         android:src="@drawable/pic"
-         android:layout_centerHorizontal="true"/>
-
+         android:src="@drawable/pic"/>
 
      <EditText
+         android:layout_height="40dp"
+         android:layout_width="match_parent"
         android:id="@+id/name"
-        style="@style/TextViewStyle"
-        android:layout_height="40dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:gravity="center"
-        android:textSize="20dp"
         android:hint="User Name"
-        android:textColorHint="#ffffff"
-        android:background="@drawable/roundedtextview"
         android:layout_below="@+id/profileImg" />
     <EditText
-        android:id="@+id/jobTitle"
-        style="@style/TextViewStyle"
         android:layout_height="40dp"
         android:layout_width="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:gravity="center"
-        android:textSize="20dp"
+        android:id="@+id/jobTitle"
         android:hint="Job Title"
-        android:textColorHint="#ffffff"
-        android:background="@drawable/roundedtextview"
         android:layout_below="@+id/name" />
     <TextView
-        android:id="@+id/about"
-        style="@style/TextViewStyle"
         android:layout_height="40dp"
-        android:layout_width="200dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:gravity="center"
-        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:id="@+id/about"
         android:text="About You:"
-        android:background="@drawable/roundedtextview"
+        android:textColor="#c9c8c8"
         android:layout_below="@+id/jobTitle" />
     <EditText
-        android:id="@+id/aboutMeText"
-        style="@style/TextViewStyle"
-        android:layout_height="200dp"
+        android:layout_height="40dp"
         android:layout_width="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:textSize="20dp"
+        android:id="@+id/aboutMeText"
         android:hint="...."
-        android:textColorHint="#ffffff"
-        android:background="@drawable/roundedtextview"
         android:layout_below="@+id/about" />
      <EditText
-         android:id="@+id/friends"
-         style="@style/TextViewStyle"
-         android:layout_height="80dp"
          android:layout_width="match_parent"
-         android:layout_marginLeft="5dp"
-         android:layout_marginRight="5dp"
-         android:layout_marginTop="20dp"
-         android:paddingLeft="5dp"
-         android:paddingRight="5dp"
+         android:id="@+id/friends"
+         android:layout_height="80dp"
          android:gravity="center"
-         android:textSize="20dp"
          android:hint="Enter the name of your friends separated by spaces, eg: Adam Sara"
-         android:textColorHint="#ffffff"
-         android:background="@drawable/roundedtextview"
          android:layout_below="@+id/aboutMeText" />
      <TextView
-         android:id="@+id/hobbies"
-         style="@style/TextViewStyle"
          android:layout_height="40dp"
-         android:layout_width="200dp"
-         android:layout_marginLeft="100dp"
-         android:layout_marginRight="5dp"
+         android:layout_width="match_parent"
+         android:id="@+id/hobbies"
          android:layout_marginTop="30dp"
-         android:paddingLeft="5dp"
-         android:paddingRight="5dp"
-         android:gravity="center"
-         android:textSize="20dp"
+         android:textColor="#c9c8c8"
          android:text="Pick your hobbies"
-         android:background="@drawable/roundedtextview"
          android:layout_below="@+id/friends" />
      <ListView
          android:id="@+id/hobbiesList"
          android:layout_height="400dp"
          android:layout_width="match_parent"
-         android:layout_marginLeft="5dp"
-         android:layout_marginRight="5dp"
-         android:layout_marginTop="10dp"
-         android:paddingLeft="5dp"
-         android:paddingRight="5dp"
          android:textSize="18dp"
-         android:layout_below="@+id/hobbies"
-         android:clickable="true" />
+         android:layout_below="@+id/hobbies" />
      <Button
          android:id="@+id/savebutton"
-         android:background="@drawable/roundedlayout"
          android:layout_height="40dp"
          android:layout_width="match_parent"
-         android:layout_marginLeft="5dp"
-         android:layout_marginRight="5dp"
-         android:layout_marginTop="10dp"
-         android:paddingLeft="5dp"
-         android:paddingRight="5dp"
-         android:gravity="center"
-         android:textSize="20dp"
          android:layout_below="@+id/hobbiesList"
-         android:layout_centerHorizontal="true"
          android:text="Save"
          android:clickable="true" />
-
-
-
-
  </RelativeLayout>
-        </LinearLayout>
     </ScrollView>

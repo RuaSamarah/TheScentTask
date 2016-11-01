@@ -9,39 +9,20 @@
         <item name="android:textViewStyle">@style/TextViewStyle</item>
         <item name="android:editTextStyle">@style/EditTextStyle</item>
     </style>
-
-    <style name="Theme.Custom" parent="Theme.AppCompat">
-        <item name="windowActionBar">false</item>
-        <item name="windowActionBarOverlay">true</item>
-        <item name="android:windowActionBarOverlay">true</item>
+    <style name="FragmentTheme">
+        <item name="android:buttonStyle">@style/FragmentStyle</item>
+        <item name="android:textViewStyle">@style/FragmentStyle</item>
+        <item name="android:editTextStyle">@style/FragmentStyle</item>
+        <item name="android:listViewStyle">@style/FragmentListViewStyle</item>
     </style>
-
-    <style name="CustomActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:windowActionBarOverlay">true</item>
-        <!-- Support library compatibility -->
-        <item name="windowActionBarOverlay">true</item>
-    </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 
     <style name="RelativeLayoutStyle">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:background">#ffffff</item>
     </style>
 
@@ -49,14 +30,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">320dp</item>
         <item name="android:layout_weight">1</item>
-
     </style>
 
-
-    <!-- editText style done -->
     <style name="EditTextStyle" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textColorHint">#000000</item>
         <item name="android:paddingLeft">18dp</item>
@@ -64,13 +42,13 @@
         <item name="android:background">#d3d3d3</item>
         <item name="android:typeface">monospace</item>
     </style>
-    <!-- textView style done -->
+
     <style name="TextViewStyle" parent="@android:style/TextAppearance">
         <item name="android:textColor">#ffffff</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    <!-- button style done -->
+
     <style name="ButtonStyle" parent="@android:style/ButtonBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">40dp</item>
@@ -79,18 +57,64 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20dp</item>
         <item name="android:background">@drawable/roundedbutton</item>
-
     </style>
+
     <style name="ViewStyle" >
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_marginRight">7dp</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:background">@drawable/circle</item>
-
     </style>
 
+    <style name="ToobarStyle" >
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:id">@id/toolbar</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:background">#33ffffff</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
 
+    <style name="ToolbarTextViewStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">#8888</item>
+    </style>
+
+    <style name="FragmentStyle">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#c9c8c8</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@drawable/roundedtextview</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="FragmentListViewStyle">
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:background">#33ffffff</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+
+    <style name="FragmentImageViewStyle">
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:background">@drawable/pic</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
 
 
 </resources>
