@@ -4,13 +4,22 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 
 
-public class User extends RealmObject {
+public class User extends RealmObject{
 
 
     private String userName;
     private String userJob;
     private String userAbout;
     private String userFriends;
+
+    public RealmList<Item> getSelectedItems() {
+        return selectedItems;
+    }
+
+    public void setSelectedItems(RealmList<Item> selectedItems) {
+        this.selectedItems = selectedItems;
+    }
+
     public RealmList<Item> selectedItems;
 
     public String getUserAbout() {

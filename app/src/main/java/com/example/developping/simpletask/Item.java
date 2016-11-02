@@ -1,11 +1,9 @@
 package com.example.developping.simpletask;
 
-import io.realm.RealmModel;
+import io.realm.RealmObject;
 
-/**
- * Created by ruaasamara on 11/2/2016 AD.
- */
-public class Item implements RealmModel {
+
+public class Item extends RealmObject {
     String hobby;
 
     public String getHobby() {

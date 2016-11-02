@@ -23,6 +23,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -116,8 +117,9 @@ public class ProfileFragment extends Fragment {
                     outputStrArr[i] = selectedItems.get(i);
                 }
 
-                Item stringHobbies = realm.createObject(Item.class);
+
                 for (int i = 0; i < selectedItems.size(); i++) {
+                    Item stringHobbies = realm.createObject(Item.class);
                     stringHobbies.setHobby(outputStrArr[i]);
                     user.selectedItems.add(stringHobbies);
                 }
@@ -180,22 +182,32 @@ public class ProfileFragment extends Fragment {
     }
 
     public void setUp() {
-        Log.d("creating the view","<<<<<<<<<<<<<<<<<<<<<<<<<"+visit);
         RealmQuery query = realm.where(User.class);
         RealmResults results = query.findAll();
         if (results.size() != 0) {
-            Log.d("creating the view",">>>>>>>>>>>>>>>>>>>>>>>>>>>");
             User user = (User) results.get(0);
             if (user != null) {
                 String username = user.getUserName();
                 String userjob = user.getUserJob();
                 String userabout = user.getUserAbout();
                 String userfriends = user.getUserFriends();
+                RealmList<Item> listOfHobbies = user.getSelectedItems();
 
                 name.setText(username);
                 job.setText(userjob);
                 about.setText(userabout);
                 friends.setText(userfriends);
+
+                for (int i = 0; i < listOfHobbies.size(); i++) {
+                    for (int j = 0; j < (listView.getChildCount()-1); j++) {
+                        String hobbyInList = adapter.getItem(j).trim();
+                        if (listOfHobbies.get(i).getHobby().equals(hobbyInList)){
+                            listView.setItemChecked(j, true);
+                            listView.refreshDrawableState();
+                            Log.d("creating the view",">>>>>>>>>>>>>>>>>>>>>>>>>>>"+hobbyInList);
+                        }
+                    }
+                }
             }
         }
 

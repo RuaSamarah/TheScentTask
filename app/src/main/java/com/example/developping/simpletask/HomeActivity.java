@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -127,13 +128,15 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void jsonDeserialization() throws JSONException {
+    public void doDeserialization() throws JSONException {
 
 
         String username = user.getUserName();
         String userjob = user.getUserJob();
         String userabout = user.getUserAbout();
         String userfriends = user.getUserFriends();
+        RealmList<Item> listOfHobbies = user.getSelectedItems();
+        Log.d("realmList",">>>>>>>>>>>>>"+listOfHobbies);
 
 
        // String username = jsonObj.getString("name");
@@ -149,15 +152,17 @@ public class HomeActivity extends AppCompatActivity {
             setFriends(userfriends);
         }
 
-       /* String[] userHoppies = user.getSelectedItems();
-        for (int i = 0; i < userHoppies.length; i++) {
-            hobbiesList.add(userHoppies[i]);
-        }*/
+        for (int i = 0; i < listOfHobbies.size(); i++) {
+            String hoppy = listOfHobbies.get(i).getHobby();
+            hobbiesList.add(hoppy);
+        }
        /* JSONArray hobbiesArray = jsonObj.getJSONArray("hobbies");
         for (int i = 0; i < hobbiesArray.length(); i++) {
             JSONObject obj = hobbiesArray.getJSONObject(i);
             drawHobby(obj, i);
         }*/
+
+
         // hobbies arrayList is ready
         Log.d("hobbies list", hobbiesList.toString());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.grid_view_item, hobbiesList);
@@ -191,7 +196,7 @@ public class HomeActivity extends AppCompatActivity {
                                   if (user != null) {
                                       cleaning();
                                       try {
-                                          jsonDeserialization();
+                                          doDeserialization();
                                       } catch (JSONException e) {
                                           e.printStackTrace();
                                       }
