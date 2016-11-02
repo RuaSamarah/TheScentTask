@@ -67,12 +67,13 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<String> hobbiesList;
     GridView gridView;
     Realm realm;
+    User user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Realm realm = Realm.getDefaultInstance();
+         realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_home);
 
         repeated= 1;
@@ -113,7 +114,8 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
+       visit = false;
+        editor.putBoolean("visit", visit);
     }
 
 
@@ -126,13 +128,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void jsonDeserialization() throws JSONException {
-        String jsonString = sharedpreferences.getString("profileInfo", null);
-        JSONObject jsonObj = new JSONObject(jsonString);
 
-        realm = Realm.getDefaultInstance();
-        RealmQuery query = realm.where(User.class);
-        RealmResults results = query.findAll();
-        User user = (User) results.get(0);
+
         String username = user.getUserName();
         String userjob = user.getUserJob();
         String userabout = user.getUserAbout();
@@ -152,10 +149,10 @@ public class HomeActivity extends AppCompatActivity {
             setFriends(userfriends);
         }
 
-        String[] userHoppies = user.getSelectedItems();
+       /* String[] userHoppies = user.getSelectedItems();
         for (int i = 0; i < userHoppies.length; i++) {
             hobbiesList.add(userHoppies[i]);
-        }
+        }*/
        /* JSONArray hobbiesArray = jsonObj.getJSONArray("hobbies");
         for (int i = 0; i < hobbiesArray.length(); i++) {
             JSONObject obj = hobbiesArray.getJSONObject(i);
@@ -187,16 +184,19 @@ public class HomeActivity extends AppCompatActivity {
                     visit = sharedpreferences.getBoolean("visit", false);
                     if (visit == true) {
                           if (repeated == 1) {
-                              try {
-                                  String jsonString = sharedpreferences.getString("profileInfo", null);
-                                  JSONObject jsonObj = new JSONObject(jsonString);
-                                  if (jsonObj != null) {
+                                  realm = Realm.getDefaultInstance();
+                                  RealmQuery query = realm.where(User.class);
+                                  RealmResults results = query.findAll();
+                                  user = (User) results.get(0);
+                                  if (user != null) {
                                       cleaning();
-                                      jsonDeserialization();
+                                      try {
+                                          jsonDeserialization();
+                                      } catch (JSONException e) {
+                                          e.printStackTrace();
+                                      }
                                   }
-                              } catch (JSONException ex) {
-                                  ex.printStackTrace();
-                              }
+
                           }
                     }
                 }
@@ -297,6 +297,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        realm.beginTransaction();
+        RealmResults<User> result = realm.where(User.class).findAll();
+        Log.d("Realm testing", result.toString());
+        result.deleteAllFromRealm();
+        realm.commitTransaction();
         realm.close();
     }
 

@@ -19,9 +19,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import org.json.JSONException;
+
 import java.util.ArrayList;
+
 import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 public class ProfileFragment extends Fragment {
     final int REQ_CODE_PICK_IMAGE= 1;
@@ -41,6 +44,7 @@ public class ProfileFragment extends Fragment {
     String[] outputStrArr;
     ImageView profilePicture;
     Boolean visit;
+    int haveContent;
     Realm realm;
 
     @Override
@@ -48,7 +52,9 @@ public class ProfileFragment extends Fragment {
         Context context = new ContextThemeWrapper(getActivity(), R.style.FragmentTheme);
         LayoutInflater localInflater = inflater.cloneInContext(context);
         View rootView = localInflater.inflate(R.layout.profile_fragment, parent, false);
+        Log.d("creating the view1","<<<<<<<<<<<<<<<<<<<<<<<<<");
         realm = Realm.getDefaultInstance();
+
 
 
         listView = (ListView)rootView.findViewById(R.id.hobbiesList);
@@ -60,7 +66,7 @@ public class ProfileFragment extends Fragment {
         profilePicture = (ImageView) rootView.findViewById(R.id.profileImg);
         linearLayout = (LinearLayout)rootView.findViewById(R.id.friendsLayout);
         hobbiesGridView = (GridView)rootView.findViewById(R.id.gridView);
-        visit = false;
+
 
         return rootView;
     }
@@ -69,17 +75,32 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+        Log.d("creating the view2","<<<<<<<<<<<<<<<<<<<<<<<<<");
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = sharedpreferences.edit();
+        visit = sharedpreferences.getBoolean("visit", false);
         String[] hobbies = getResources().getStringArray(R.array.hobbies);
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, hobbies);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
+        setUp();
 
 
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                realm.beginTransaction();
+                RealmResults<User> result = realm.where(User.class).findAll();
+                Log.d("Realm testing", result.toString());
+                result.deleteAllFromRealm();
+                realm.commitTransaction();
+
+
+                //<<<<<<<<<< open it again for new data
+                realm.beginTransaction();
+                User user = realm.createObject(User.class);
+
+
                 SparseBooleanArray checked = listView.getCheckedItemPositions();
                 ArrayList<String> selectedItems = new ArrayList<String>();
                 for (int i = 0; i < checked.size(); i++) {
@@ -95,6 +116,13 @@ public class ProfileFragment extends Fragment {
                     outputStrArr[i] = selectedItems.get(i);
                 }
 
+                Item stringHobbies = realm.createObject(Item.class);
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    stringHobbies.setHobby(outputStrArr[i]);
+                    user.selectedItems.add(stringHobbies);
+                }
+
+
                 String userName = (String) name.getText().toString().trim();
                 String userJob = (String) job.getText().toString().trim();
                 String userAbout = (String) about.getText().toString().trim();
@@ -102,37 +130,31 @@ public class ProfileFragment extends Fragment {
 
 
                 // saving to realm
-                realm.beginTransaction();
-                User user = realm.createObject(User.class);
                 user.setUserName(userName);
                 user.setUserJob(userJob);
                 user.setUserAbout(userAbout);
                 user.setUserFriends(userFriends);
-                user.setSelectedItems(outputStrArr);
                 realm.commitTransaction();
 
 
 
                 // Create a bundle object
-                Bundle b = new Bundle();
-                b.putStringArray("selectedItems", outputStrArr);
-                b.putString("userName", userName);
-                b.putString("userJob", userJob);
-                b.putString("userAbout", userAbout);
-                b.putString("userFriends", userFriends);
-                JsonUtil json = new JsonUtil();
-                try {
-                   String jsonStr =  json.toJSon(b);
+               // Bundle b = new Bundle();
+               // b.putStringArray("selectedItems", outputStrArr);
+               // b.putString("userName", userName);
+               // b.putString("userJob", userJob);
+               // b.putString("userAbout", userAbout);
+               // b.putString("userFriends", userFriends);
+               // JsonUtil json = new JsonUtil();
+
+                 //  String jsonStr =  json.toJSon(b);
                     visit = true;
-                    editor.putString("profileInfo",jsonStr);
+                   // editor.putString("profileInfo",jsonStr);
                     editor.putBoolean("visit", visit);
                     editor.commit();
                     cleaning();
                     getFragmentManager().popBackStack();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
 
 
@@ -157,31 +179,28 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
+    public void setUp() {
+        Log.d("creating the view","<<<<<<<<<<<<<<<<<<<<<<<<<"+visit);
+        RealmQuery query = realm.where(User.class);
+        RealmResults results = query.findAll();
+        if (results.size() != 0) {
+            Log.d("creating the view",">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            User user = (User) results.get(0);
+            if (user != null) {
+                String username = user.getUserName();
+                String userjob = user.getUserJob();
+                String userabout = user.getUserAbout();
+                String userfriends = user.getUserFriends();
 
-        savedInstanceState.putString("userName", (String) name.getText().toString().trim());
-        savedInstanceState.putString("userJob", (String) job.getText().toString().trim());
-        savedInstanceState.putString("userAbout", (String) about.getText().toString().trim());
-        savedInstanceState.putString("userFriends", (String) friends.getText().toString().trim());
-        savedInstanceState.putStringArray("selectedItems", outputStrArr);
-        Log.d("inside on recreated",savedInstanceState.getString("userName"));
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            Log.d("inside on recreated", "ghgadhhafahadygetgdrwfdsowibfkdw");
-            name.setText(savedInstanceState.getString("userName"));
-            job.setText(savedInstanceState.getString("userJob"));
-            about.setText(savedInstanceState.getString("userAbout"));
-            friends.setText(savedInstanceState.getString("userFriends"));
-
+                name.setText(username);
+                job.setText(userjob);
+                about.setText(userabout);
+                friends.setText(userfriends);
+            }
         }
+
     }
+
 
 
 }
