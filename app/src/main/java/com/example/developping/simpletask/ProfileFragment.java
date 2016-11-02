@@ -199,12 +199,11 @@ public class ProfileFragment extends Fragment {
                 friends.setText(userfriends);
 
                 for (int i = 0; i < listOfHobbies.size(); i++) {
-                    for (int j = 0; j < (listView.getChildCount()-1); j++) {
+                    for (int j = 0; j < (adapter.getCount()); j++) {
                         String hobbyInList = adapter.getItem(j).trim();
                         if (listOfHobbies.get(i).getHobby().equals(hobbyInList)){
                             listView.setItemChecked(j, true);
                             listView.refreshDrawableState();
-                            Log.d("creating the view",">>>>>>>>>>>>>>>>>>>>>>>>>>>"+hobbyInList);
                         }
                     }
                 }
